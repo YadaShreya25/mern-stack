@@ -25,14 +25,30 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function(err){
 	}
 	else{
 		console.log("DB connected");
-		userLib.createFirstUser(function(err,res)
-		{
+		userLib.getAllUsers(function(err,totUsers){
 			if(err)
 			{
 				console.error(err);
 			}
-			else{
-				console.log(res);
+			else
+			{
+				if(totUsers.length==0)
+				{
+					userLib.createFirstUser(function(err,output)
+					{
+						if(err)
+						{
+							console.error(err);
+						}
+						else
+						{
+							console.log(output);
+						}
+					});
+				}
+				else{
+					console.log("Already 1 user is present");
+				}
 			}
 		});
         app.listen(port, function(){
