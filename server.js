@@ -25,32 +25,61 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function(err){
 	}
 	else{
 		console.log("DB connected");
-		userLib.getAllUsers(function(err,totUsers){
+		/*userLib.getAllUsers(function(err,output){
 			if(err)
 			{
 				console.error(err);
 			}
 			else
 			{
-				if(totUsers.length==0)
-				{
-					userLib.createFirstUser(function(err,output)
-					{
-						if(err)
-						{
-							console.error(err);
-						}
-						else
-						{
-							console.log(output);
-						}
-					});
-				}
-				else{
-					console.log("Already 1 user is present");
-				}
+				 console.log(output);
+			}
+		})*/
+		/*userLib.createFirstUser(function(err,output){
+			if(err)
+			{
+				console.error(err);
+			}
+			else
+			{
+				 console.log(output);
+			}
+		});*/
+		/*userLib.updateUser(function(err,result){
+			if(err)
+			{
+				console.error(err);
+			}
+			else{
+				console.log(result);
+			}
+		});*/
+		userLib.deleteUser("YadaShreya",function(err,result)
+		{
+			if(err)
+			{
+				console.error(err);
+			}
+			else{
+				console.log(result);
 			}
 		});
+		/*userLib.getUserByFilter({userName : "YadaShreya"},function(err,result){
+			if(err){
+				console.error(err);
+			}
+			else{
+				console.log(result);
+			}
+		});*/
+		/*userLib.createUser({userName: "Ramu",yearOfGraduation:2023},function(err,result){
+			if(err){
+				console.error(err);
+			}
+			else{
+				console.log(result);
+			}
+		});*/
         app.listen(port, function(){
 			console.log("Server running on http://localhost:"+port);
 			console.log(`Server running on http://localhost:${port}`);
