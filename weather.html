@@ -30,8 +30,8 @@
         <h1>What's the weather?</h1>
 
         <div id="inputBox" class="input-group mb-3 mt-5">
-            <input id="searchBox" type="text" class="form-control form-control-lg" placeholder="Type a city name" >
-            <button  type="button" class="btn btn-outline-success" type="button" id="button-addon2"><i class="fas fa-search fa-lg fa-fw"></i></button>
+            <input id="searchBox" type="text" class="form-control form-control-lg" placeholder="Type a city name"  >
+            <button  onclick="showResult()" type="button" class="btn btn-outline-success" type="button" id="button-addon2"><i class="fas fa-search fa-lg fa-fw"></i></button>
         </div>
         
         <div class="card weather-card" >
@@ -40,8 +40,8 @@
               <h4 id="city">Delhi</h4>
               <h6 id="date">Fri Feb 17 2023</h6>
           </div>
-
-            <img id = "image" src="/images/clear.jpg" class="card-img-top" alt="weather images">
+          
+            <img id = "cardImage" src="/images/clear.jpg" class="card-img-top" alt="weather images">
             <div class="card-body">
               <h6 id="temp" class="display-4 font-weight-bold text-center">13°C</h6> 
               <h6 id="feelLike" class="display-7 font-weight-bold text-center"> (Feels Like 13°C) </h6>
@@ -96,9 +96,15 @@
         searchBox.addEventListener("keypress",function(event){
             if (event.keyCode == 13){
                 getWeatherReport(searchBox.value);
+                searchBox.value="";
             }
 
         });
+
+        function showResult()
+        {
+            getWeatherReport(searchBox.value);
+        }
 
         function getWeatherReport(city){
             // https://api.openweathermap.org/data/2.5/weather?q=cityName&appid=eb7a2d4a5a9b284fe54b7bb547238443&unit=metric
@@ -117,7 +123,7 @@
     function showWeatherReport(currentWeather){
         let city = document.getElementById("city");
         let currentDate = document.getElementById("date");
-        let cardImage = document.getAnimations("cardImage");
+        let cardImage = document.getElementById("cardImage"); 
         let temp = document.getElementById("temp");
         let feelLike = document.getElementById("feelLike");
         let weather = document.getElementById("weather");
@@ -125,65 +131,63 @@
         let humidty= document.getElementById("humidity");
         let pressure = document.getElementById("pressure");
         let visibility = document.getElementById("visibility");
-        let windSpeed = document.getElementById("windspeed");
+        let windSpeed = document.getElementById("windSpeed");
 
-        console.log(currentWeather);
 
         city.innerHTML = currentWeather.name;
 
         let todayDate = new Date().toDateString();
         currentDate.innerHTML = todayDate;
         cardImage.src = manageImage(currentWeather.weather[0].main);
-
         temp.innerHTML = Math.round(currentWeather.main.temp)+ "°C";
         feelLike.innerHTML=  `(feels Like ${Math.round(currentWeather.main.feels_like)}°C)`;
         weather.innerHTML = currentWeather.weather[0].main;
+        minMaxTemp.innerHTML = `${Math.floor(currentWeather.main.temp_min)}°C (min)/ ${Math.ceil(currentWeather.main.temp_max)} °C(max)`;
 
-        minMaxTemp.innerHTML = `${Math.floor(currentWeather.main.temp_min)}°C (min)/ ${Math.ceil(currentWeather.main.temp_max)} °C(max)`
-
-        humidity.innerHTML = `<span>Humidity </span> ${currentWeather.main.humidity}`
-        pressure.innerHTML = `<span>Pressure </span> ${currentWeather.main.pressure}`
-        visibility.innerHTML = `<span>Visibility </span> ${currentWeather.main.visibility}`
-        windSpeed.innerHTML = `<span>Windspeed </span> ${currentWeather.main.windSpeed}`
+        humidity.innerHTML = `<span>Humidity </span> ${currentWeather.main.humidity}`;
+        pressure.innerHTML = `<span>Pressure </span> ${currentWeather.main.pressure}`;
+        visibility.innerHTML = `<span>Visibility </span> ${currentWeather.visibility}`;
+        windSpeed.innerHTML = `<span>Windspeed </span> ${currentWeather.wind.speed}`;
     }
 
     function manageImage(weatherType) {
         if (weatherType === 'Clear') {
     
-            return "images/clear.jpg"
+            return "images/clear.jpg";
     
         } else if (weatherType === 'Smoke') {
     
-            return "images/smoke.jpg"
+            return "images/smoke.jpg";
     
         } else if (weatherType === 'Haze') {
     
-            return "images/haze.jpg"
+            return "images/haze.jpg";
     
         } else if (weatherType === 'Rain') {
     
-            return "images/rain.jpg"
+            return "images/Rain.jfif";
     
         } else if (weatherType === 'Snow') {
     
-            return "images/snow.jpg"
+            return "images/snow.jfif";
     
         } else if (weatherType === 'Thunderstorm') {
     
-            return "images/thunderstorm.jpg"
+            return "images/thunderstorm.jfif";
     
         } else if (weatherType === "Mist") {
     
-            return "images/mist.jpg"
+            return "images/mist.jpg";
     
         } else if (weatherType === "Clouds") {
     
-            return "images/clouds.jpg"
+            return "images/clouds.jpg";
     
         }
         else {
-            return "images/clear.jpg"
+            return "images/clear.jpg";
         }
+        
     }
 
     </script>
