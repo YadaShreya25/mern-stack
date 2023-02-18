@@ -22,17 +22,20 @@
         .inner h{
             font-style:bold;
         }
+        button:hover{
+            background-color: rgb(66, 166, 66);
+        }
     </style>
 </head>
 <body>
     <div class="card">
-        <img id="userImage" src="img.jfif" alt="Taj Mahal" width="300px">
+        <img id="userImage" src="images/img.jfif" alt="Taj Mahal" width="300px">
         <div class="inner">
             <h1 id="userTitle">Taj Mahal</h1>
             <p id="userDesignation">The Taj Mahal is an ivory-white marble mausoleum on the right bank of the river Yamuna in the Indian city of Agra.</p>
 
         </div>
-        <button onclick="toggleUser()">Toggle</button>
+        <button onclick="toggleUser()">Click</button>
     </div>
     <script>
 
@@ -40,13 +43,13 @@
        const userOne = {
         name : "Taj Mahal",
         designation : "The Taj Mahal is an ivory-white marble mausoleum on the right bank of the river Yamuna in the Indian city of Agra.",
-        image : "img.jfif",
+        image : "images/img.jfif",
        }
 
        const userTwo = {
         name : "Charminar",
         designation :"In Hyderabad",
-        image : "img1.jfif",
+        image : "images/img1.jfif",
        }
        let currentIsJohn = true;
        let currentUser = userOne;
@@ -68,7 +71,7 @@
         userTitle.innerHTML = currentUser.name;
         userDesignation.innerHTML = currentUser.designation;
         userImage.src = currentUser.image;
-        console.log("Current user",currentUser);*/
+        console.log("Current user",currentUser);
        }
     </script>
 </body>
