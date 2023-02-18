@@ -30,15 +30,15 @@
         <h1>What's the weather?</h1>
 
         <div id="inputBox" class="input-group mb-3 mt-5">
-            <input type="text" class="form-control form-control-lg" placeholder="Type a city name" >
-            <button class="btn btn-outline-success" type="button" id="button-addon2"><i class="fas fa-search fa-lg fa-fw"></i></button>
+            <input id="searchBox" type="text" class="form-control form-control-lg" placeholder="Type a city name" >
+            <button  type="button" class="btn btn-outline-success" type="button" id="button-addon2"><i class="fas fa-search fa-lg fa-fw"></i></button>
         </div>
         
         <div class="card weather-card" >
 
           <div class="card-title text-center mt-3">
               <h4 id="city">Delhi</h4>
-              <h6 id="data">Fri Feb 17 2023</h6>
+              <h6 id="date">Fri Feb 17 2023</h6>
           </div>
 
             <img id = "image" src="/images/clear.jpg" class="card-img-top" alt="weather images">
@@ -93,16 +93,15 @@
         };
 
         const searchBox = document.getElementById("searchBox");
-
         searchBox.addEventListener("keypress",function(event){
             if (event.keyCode == 13){
-                getWeatherReport(searchBox.value)
+                getWeatherReport(searchBox.value);
             }
 
         });
 
         function getWeatherReport(city){
-            // https://api.openweathermap.org/data/2.5/weather%22?q=cityName&appid=eb7a2d4a5a9b284fe54b7bb547238443&unit=metric
+            // https://api.openweathermap.org/data/2.5/weather?q=cityName&appid=eb7a2d4a5a9b284fe54b7bb547238443&unit=metric
             fetch(`${weatherApi.baseUrl}?q=${city}&appid=${weatherApi.key}&units=metric`)
             .then(function(response){ return response.json()})
             .then(function(response){
@@ -110,7 +109,7 @@
             })
             .catch(function(err){
                 //alert("This City is not found!")
-                console.log(err)
+                console.log(err);
             })
         }
 
