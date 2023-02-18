@@ -5,7 +5,19 @@ const mongoose=require("mongoose");
 
 const express = require('express');
 const app = express();
+app.use(express.static("public"));
 const port = process.env.PORT || 5050;
+
+app.get("/card", function(req, res){
+	//res.send("I am Shreya");
+	res.sendFile(__dirname+"/card.html")
+});
+
+
+app.get("/weather", function(req, res){
+	//res.send("I am Shreya");
+	res.sendFile(__dirname+"/weather.html")
+});
 
 app.get("/", function(req, res){
 	//res.send("I am Shreya");

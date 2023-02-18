@@ -40,12 +40,13 @@ module.exports.updateUser = async function(username,data,callback){
     }
 }
 
+// deleting the user by using username
 module.exports.deleteUser = async function(username,callback){
     try{
         var query= {
             userName : username,
         };
-        var result = await userModel.updateOne(query,{isDeleted : true});
+        var result = await userModel.deleteOne(query,{isDeleted : true});
         callback(null,result);
     }
     catch(err){

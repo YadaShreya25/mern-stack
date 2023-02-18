@@ -26,11 +26,50 @@
 </head>
 <body>
     <div class="card">
-        <img src="img.jfif" alt="Taj Mahal" width="300px">
+        <img id="userImage" src="img.jfif" alt="Taj Mahal" width="300px">
         <div class="inner">
-            <h1>Taj Mahal</h1>
-            <p>The Taj Mahal is an ivory-white marble mausoleum on the right bank of the river Yamuna in the Indian city of Agra.<a href="https://en.wikipedia.org/wiki/Taj_Mahal">Read more</a></p>
+            <h1 id="userTitle">Taj Mahal</h1>
+            <p id="userDesignation">The Taj Mahal is an ivory-white marble mausoleum on the right bank of the river Yamuna in the Indian city of Agra.</p>
+
         </div>
+        <button onclick="toggleUser()">Toggle</button>
     </div>
+    <script>
+
+        //document.getElementById('userImage').innerHTML=
+       const userOne = {
+        name : "Taj Mahal",
+        designation : "The Taj Mahal is an ivory-white marble mausoleum on the right bank of the river Yamuna in the Indian city of Agra.",
+        image : "img.jfif",
+       }
+
+       const userTwo = {
+        name : "Charminar",
+        designation :"In Hyderabad",
+        image : "img1.jfif",
+       }
+       let currentIsJohn = true;
+       let currentUser = userOne;
+
+       let userTitle = document.getElementById("userTitle");
+       let userImage = document.getElementById("userImage");
+       let userDesignation = document.getElementById("userDesignation");
+
+       let toggleUser = function() {
+        if(currentIsJohn){
+            currentUser= userTwo;
+            currentIsJohn = false;
+        }
+        else{
+            currentUser= userOne;
+            currentIsJohn = true;
+        }
+         
+        userTitle.innerHTML = currentUser.name;
+        userDesignation.innerHTML = currentUser.designation;
+        userImage.src = currentUser.image;
+        console.log("Current user",currentUser);*/
+       }
+    </script>
 </body>
 </html>
