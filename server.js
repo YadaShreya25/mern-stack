@@ -1,11 +1,18 @@
-require('dotenv').config();
-
-const userLib = require("./backend/lib/userLib");
-const todoLib = require("./backend/lib/todoLib");
-const mongoose=require("mongoose");
+//require('dotenv').config();
+//import dotenv from "dotenv";
+//dotenv.config();
+import { config } from "dotenv";
+config();
+//const userLib = require("./backend/lib/userLib");
+import *as userLib from "./backend/lib/userLib.js";
+//const todoLib = require("./backend/lib/todoLib");
+import *as todoLib from "./backend/lib/todoLib.js";
+//const mongoose=require("mongoose");
+import mongoose from "mongoose";
 const port = process.env.PORT || 5050;
 
-const express = require('express');
+//const express = require('express');
+import express from "express";
 const app = express();
 
 //whatwver front end sends to us it will put it express.json!
@@ -15,12 +22,12 @@ app.use(express.static("public"));
 //function(request,response)
 app.get("/card", function(req, res){
 	//res.send("I am Shreya");
-	res.sendFile(__dirname+"/card.html")
+	res.sendFile(process.cwd()+"/card.html")
 });
 
 app.get("/todo", function(req, res){
 	//res.send("I am Shreya");
-	res.sendFile(__dirname+"/public/todo.html")
+	res.sendFile(process.cwd()+"/public/todo.html")
 });
 
 /*app.get("/api/todos", function(req, res){
@@ -117,20 +124,41 @@ app.delete(("/api/todos/:todoid"),function(req,res){
 	});
 });
 
+app.get("/api/todoscom",function(req,res){
+	todoLib.getAllCompletedTodos(function(err,todos){
+		if(err){
+			res.json({status : "error", message : err, data : null});
+		}
+		else{
+			res.json({status : "success", data : todos});
+		}
+	});
+});
+
+app.get("/api/todosdel",function(req,res){
+	todoLib.getAllDeletedTodos(function(err,todos){
+		if(err){
+			res.json({status : "error", message : err, data : null});
+		}
+		else{
+			res.json({status : "success", data : todos});
+		}
+	});
+});
 
 app.get("/weather", function(req, res){
 	//res.send("I am Shreya");
-	res.sendFile(__dirname+"/weather.html")
+	res.sendFile(process.cwd()+"/weather.html")
 });
 
 app.get("/", function(req, res){
 	//res.send("I am Shreya");
-	res.sendFile(__dirname+"/index.html")
+	res.sendFile(process.cwd()+"/index.html")
 });
 
 app.get("/resume", function(req, res){
 	//res.send("I am Shreya");
-	res.sendFile(__dirname+"/resume.html")
+	res.sendFile(process.cwd()+"/resume.html")
 });
 
 mongoose.set('strictQuery', true);
