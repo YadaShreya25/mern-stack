@@ -109,7 +109,6 @@ async function getAllTodo(){
             todoList.appendChild(listItem);
         })
 }
-
 getAllTodo();
 
 async function setChecked(id)
